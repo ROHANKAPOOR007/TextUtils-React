@@ -40,12 +40,9 @@ export default function Textform(props) {
 
   //Copy text
   const handleCopy = ()=>{
-    let newtext = document.getElementById('myBox');
-    newtext.select();
-    navigator.clipboard.writeText(newtext.value);
-    document.getSelection().removeAllRanges();
+    navigator.clipboard.writeText(text);
     props.showAlert("Copy to Clipboard", "success");
-
+    
   };
 
   // remove extra spaces
@@ -80,8 +77,11 @@ export default function Textform(props) {
 
       <div className={`container my-3 text-${props.mode==='light'?'dark':'light'}`}>
         <h2>Your Text Summary</h2>
-        <p>{text.split(" ").filter((element)=>{return element.length!==0}).length} Words and {text.length} Characters</p>
+
+        <p>{text.split(/\s+/).filter((element)=>{return element.length!==0}).length} Words and {text.length} Characters</p>
+
         <p>{0.008 * text.split(" ").filter((element)=>{return element.length!==0}).length} Minutes Read</p>
+
         <h3>Preview</h3>
         <p>{text.length>0?text:"Nothing to Preview!!"}</p>
       </div>
