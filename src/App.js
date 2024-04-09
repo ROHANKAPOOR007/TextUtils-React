@@ -1,17 +1,16 @@
 import { useState } from 'react';
 import './App.css';
-// import About from './components/About';
+import About from './components/About';
 import Navbar from './components/Navbar';
 import Textform from './components/Textform';
 import Alert from './components/Alert';
-// import About from './components/About';
 
-// import {
-//   BrowserRouter as Router,
-//   Switch,
-//   Route,
-//   Link
-// } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes
+  // Link
+} from "react-router-dom";
 
 
 
@@ -51,39 +50,37 @@ function App() {
     }
   }
 
-  // return (
-  //   <>
-  //     <Router>
-  //       <Navbar title = "TextUtils" mode = {mode} toggleMode={toggleMode}/>
-  //       <Alert alert = {alert}/>
-  //       <div className="container my-3">
-
-  //         <Switch>
-  //           <Route path = "/about">
-  //             <About/>
-  //           </Route>
-
-  //           <Route path="/">
-  //           <Textform showAlert={showAlert} heading = "Enter the Text to analyze below" mode = {mode}/>
-  //           </Route>
-
-  //         </Switch>
-  //       </div>
-  //     </Router>
-
-
-  //   </>
-  // );
   return (
     <>
+      <Router>
+
         <Navbar title = "TextUtils" mode = {mode} toggleMode={toggleMode}/>
         <Alert alert = {alert}/>
         <div className="container my-3">
-            <Textform showAlert={showAlert} heading = "Enter the Text to analyze below" mode = {mode}/>
-              {/* <About/> */}
+          {/* We always use exect path to determine the correct path of the component*/}
+          <Routes>
+            <Route exect path="/about" element={<About />} />
+            <Route exect path="/" element={<Textform showAlert={showAlert} heading="Enter the Text to analyze below" mode={mode} />} />
+          </Routes>
+
         </div>
+
+      </Router>
+
+
     </>
   );
 }
+
+//   return (
+//     <>
+//         <Navbar title = "TextUtils" mode = {mode} toggleMode={toggleMode}/>
+//         <Alert alert = {alert}/>
+//         <div className="container my-3">
+//             <Textform showAlert={showAlert} heading = "Enter the Text to analyze below" mode = {mode}/>
+//               {/* <About/> */}
+//         </div>
+//     </>
+//   );
 
 export default App;
